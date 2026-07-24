@@ -1,0 +1,53 @@
+{
+  "name": "ryzen-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "RYZEN — WhatsApp Multi-Device AI Userbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "userbot",
+    "baileys",
+    "ai"
+  ],
+  "author": "SY4M",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
+    
+    "pg": "^8.12.0",
+    "openai": "^4.57.0",
+    "axios": "^1.7.7",
+    "sharp": "^0.33.5",
+    "fluent-ffmpeg": "^2.1.3",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "archiver": "^7.0.1",
+    "node-fetch": "^2.7.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "pino": "^9.4.0",
+    "pino-pretty": "^11.2.2",
+    "chalk": "^4.1.2",
+    "figlet": "^1.7.0",
+    "jimp": "^1.6.0",
+    "cheerio": "^1.0.0",
+    "youtubei.js": "^10.3.0",
+    "node-cron": "^3.0.3",
+    "express": "^4.21.0",
+    "socket.io": "^4.7.5",
+    "dotenv": "^16.4.5",
+    "mime-types": "^2.1.35",
+    "file-type": "^16.5.4",
+    "tar": "^7.4.3",
+    "tmp": "^0.2.3",
+    "os-utils": "^0.0.14"
+  },
+  "devDependencies": {}
+}

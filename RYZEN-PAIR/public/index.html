@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RYZEN — WhatsApp Session Generator</title>
+  <meta name="description" content="Generate your RYZEN WhatsApp SESSION_ID easily with QR code or pairing code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background blobs -->
+  <div class="bg-blob blob-1" aria-hidden="true"></div>
+  <div class="bg-blob blob-2" aria-hidden="true"></div>
+  <div class="bg-blob blob-3" aria-hidden="true"></div>
+
+  <div class="wrapper">
+    <!-- ── Header ─────────────────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">RYZEN</span>
+      </div>
+      <p class="header-subtitle">WhatsApp Multi-Device Userbot · Session Generator</p>
+    </header>
+
+    <!-- ── Main Card ──────────────────────────────────────────────────────── -->
+    <main class="card" id="main-card">
+
+      <!-- Step 1: Choose login method -->
+      <section class="step" id="step-method">
+        <h1 class="step-title">Generate Your SESSION_ID</h1>
+        <p class="step-description">
+          Choose how you want to link your WhatsApp account.<br />
+          Your SESSION_ID will be displayed after successful login.
+        </p>
+
+        <div class="method-grid">
+          <button class="method-btn" id="btn-qr" aria-label="Login with QR Code">
+            <span class="method-icon">📱</span>
+            <span class="method-name">QR Code</span>
+            <span class="method-desc">Scan with WhatsApp</span>
+          </button>
+          <button class="method-btn" id="btn-code" aria-label="Login with Pairing Code">
+            <span class="method-icon">🔗</span>
+            <span class="method-name">Pairing Code</span>
+            <span class="method-desc">Enter code in WhatsApp</span>
+          </button>
+        </div>
+
+        <div class="info-box">
+          <span class="info-icon">ℹ️</span>
+          <p>We never store your credentials. The session is generated live and immediately discarded from our server.</p>
+        </div>
+      </section>
+
+      <!-- Step 2a: Phone number input (for pairing code) -->
+      <section class="step hidden" id="step-phone">
+        <h2 class="step-title">Enter Your Phone Number</h2>
+        <p class="step-description">Include your country code without the + sign.</p>
+
+        <div class="input-group">
+          <label for="phone-input" class="input-label">Phone Number</label>
+          <input
+            type="tel"
+            id="phone-input"
+            class="input-field"
+            placeholder="e.g. 919876543210"
+            maxlength="15"
+            inputmode="numeric"
+            autocomplete="tel"
+          />
+          <p class="input-hint">Country code + number, digits only. Example: 919876543210</p>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" id="btn-back-method">← Back</button>
+          <button class="btn btn-primary" id="btn-get-code">Get Pairing Code →</button>
+        </div>
+      </section>
+
+      <!-- Step 2b: QR / Pairing Code display -->
+      <section class="step hidden" id="step-auth">
+        <h2 class="step-title" id="auth-title">Waiting…</h2>
+
+        <!-- Status indicator -->
+        <div class="status-bar" id="status-bar">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Connecting…</span>
+        </div>
+
+        <!-- QR code display -->
+        <div class="qr-container hidden" id="qr-container">
+          <img id="qr-image" src="" alt="WhatsApp QR Code" class="qr-image" />
+          <p class="qr-hint">Open WhatsApp → Linked Devices → Link a Device</p>
+          <div class="qr-expiry" id="qr-expiry">QR refreshes automatically</div>
+        </div>
+
+        <!-- Pairing code display -->
+        <div class="code-container hidden" id="code-container">
+          <div class="pairing-code" id="pairing-code">- - - - - - - -</div>
+          <p class="code-hint">Open WhatsApp → Linked Devices → Link with phone number</p>
+        </div>
+
+        <!-- Loading spinner (shown between states) -->
+        <div class="spinner-container" id="spinner-container">
+          <div class="spinner"></div>
+          <p class="spinner-text">Connecting to WhatsApp…</p>
+        </div>
+      </section>
+
+      <!-- Step 3: SESSION_ID result -->
+      <section class="step hidden" id="step-result">
+        <div class="success-icon">✅</div>
+        <h2 class="step-title">SESSION_ID Generated!</h2>
+        <p class="step-description">
+          Copy this value and set it as the <code>SESSION_ID</code> environment variable in your bot.
+        </p>
+
+        <div class="session-box">
+          <div class="session-header">
+            <span>SESSION_ID</span>
+            <button class="copy-btn" id="btn-copy" aria-label="Copy SESSION_ID">
+              <span id="copy-icon">📋</span>
+              <span id="copy-text">Copy</span>
+            </button>
+          </div>
+          <textarea
+            class="session-textarea"
+            id="session-id-output"
+            readonly
+            rows="4"
+            aria-label="SESSION_ID value"
+          ></textarea>
+        </div>
+
+        <div class="info-box info-success">
+          <span class="info-icon">💡</span>
+          <p>
+            Set this in your hosting platform's environment variables as:<br />
+            <code>SESSION_ID=&lt;paste your value here&gt;</code>
+          </p>
+        </div>
+
+        <button class="btn btn-ghost" id="btn-restart">⟳ Generate Another</button>
+      </section>
+
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+    <footer class="footer">
+      <p>RYZEN WhatsApp Userbot · Made with ❤️ by <strong>SY4M</strong></p>
+      <p class="footer-warning">⚠️ Use responsibly. Automation bots may violate WhatsApp ToS.</p>
+    </footer>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

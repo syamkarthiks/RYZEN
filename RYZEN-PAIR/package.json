@@ -1,0 +1,31 @@
+{
+  "name": "ryzen-pair",
+  "version": "1.0.0",
+  "description": "RYZEN Pairing Website — Generate WhatsApp SESSION_ID independently",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "whatsapp",
+    "pairing",
+    "qr",
+    "session",
+    "baileys"
+  ],
+  "author": "SY4M",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
+    "express": "^4.21.0",
+    "socket.io": "^4.7.5",
+    "pino": "^9.4.0",
+    "tar": "^7.4.3",
+    "qrcode": "^1.5.4",
+    "dotenv": "^16.4.5"
+  }
+}
