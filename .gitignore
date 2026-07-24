@@ -1,0 +1,6 @@
+node_modules/
+session/
+sessions/
+.env
+.DS_Store
+RYZEN-PAIR/node_modules/
