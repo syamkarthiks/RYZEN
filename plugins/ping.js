@@ -53,7 +53,6 @@ module.exports = [
         `⚡ *Latency*   : ${formatMs(latency)}`,
         `⏱️  *Runtime*   : ${runtime()}`,
         `🧠 *Memory*    : ${mem.heap} MB heap / ${mem.rss} MB`,
-        `📦 *Node*      : ${process.version}`,
       ].join('\n');
 
       await msg.reply(text);
